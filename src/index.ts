@@ -190,18 +190,118 @@ class Employee {
     return 10000;
   }
 }
-console.log(new Employee(0,"odik"));
-const e = new Employee(9,"yudi");
+console.log(new Employee(0, "odik"));
+const e = new Employee(9, "yudi");
 console.log(e.empName);
 console.log(e.empCode);
 console.log(e.getSalary());
 
 // extends
 class Person extends Employee {
-  myID: number
+  myID: number;
 
-  constructor( name: string, code: number, myID: number){
-    super(code, name);
+  constructor(name: string, code: number, myID: number) {
+    super(code, name); // untuk mengambil constructor dari parent
     this.myID = myID;
   }
+  // function untuk menampilkan object
+  displayName(): void {
+    console.log("Name = " + this.myID + ", Employee Code = " + this.empCode);
+  }
 }
+const e1 = new Person("mycode", 1, 09090);
+console.log(e1);
+// call displayName
+e1.displayName();
+
+// implementasi multiple interface
+interface IPerson {
+  name?: string;
+  display(): void;
+}
+
+interface IEmployee {
+  empCode?: number;
+}
+
+class Owner implements IPerson, IEmployee {
+  empCode: number;
+  name: string;
+
+  constructor(empcode: number, name: string) {
+    this.empCode = empcode;
+    this.name = name;
+  }
+
+  display(): void {
+    console.log("Name = " + this.name + ", Employee Code = " + this.empCode);
+  }
+}
+
+let per: IPerson = new Owner(100, "Bill");
+per.display(); // Name = Bill, Employee Code = 100
+
+class Car {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  run(speed: number = 0) {
+    console.log("A " + this.name + " is moving at " + speed + " mph!");
+  }
+}
+// method overiding
+class Mercedes extends Car {
+  constructor(name: string) {
+    super(name);
+  }
+
+  run(speed = 150) {
+    console.log("A Mercedes started");
+    super.run(speed);
+  }
+}
+
+class Honda extends Car {
+  constructor(name: string) {
+    super(name);
+  }
+
+  run(speed = 100) {
+    console.log("A Honda started");
+    super.run(speed);
+  }
+}
+
+let mercObj = new Mercedes("Mercedes-Benz GLA");
+let hondaObj = new Honda("Honda City");
+
+mercObj.run(); // A Mercedes started A Mercedes-Benz GLA is moving at 150 mph!
+hondaObj.run(); // A Honda started A Honda City is moving at 100 mph!
+
+// data modifier
+// public
+// -bisa diakses didalam maupun diluar class
+// -definisi bisa menggunakan public atau tidak sama sekali.
+class myEmploye {
+  public name: string;
+
+  private nickname: string;
+  #fullname : string
+
+  constructor(name:string, nickname: string, fullname: string){
+    this.name = name
+    this.nickname = nickname
+    this.#fullname = fullname
+  }
+
+  myDisplay(): void {
+    console.log( this.nickname = "odik", this.#fullname = "odik yudi")
+  }
+}
+
+const myn = new myEmploye("odik", "yudi nugroho", "nu");
+console.log(myn.name);
+myn.myDisplay();

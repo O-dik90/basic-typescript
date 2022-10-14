@@ -1,3 +1,10 @@
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var _myEmploye_fullname;
 console.log("Hello, Typescript");
 let nama = "odik yudi nugroho";
 console.log(nama);
@@ -119,6 +126,7 @@ if (typeof user === "string") {
 }
 console.log("       ");
 console.log("___Class___");
+// origina;
 class myClass {
     constructor() {
         this.p = 3;
@@ -127,6 +135,7 @@ class myClass {
 }
 const mc = new myClass();
 console.log(`${mc.l}, ${mc.p}`);
+// constructor
 class Employee {
     constructor(code, name) {
         this.empName = name;
@@ -141,3 +150,79 @@ const e = new Employee(9, "yudi");
 console.log(e.empName);
 console.log(e.empCode);
 console.log(e.getSalary());
+// extends
+class Person extends Employee {
+    constructor(name, code, myID) {
+        super(code, name); // untuk mengambil constructor dari parent
+        this.myID = myID;
+    }
+    // function untuk menampilkan object
+    displayName() {
+        console.log("Name = " + this.myID + ", Employee Code = " + this.empCode);
+    }
+}
+const e1 = new Person("mycode", 1, 09090);
+console.log(e1);
+// call displayName
+e1.displayName();
+class Owner {
+    constructor(empcode, name) {
+        this.empCode = empcode;
+        this.name = name;
+    }
+    display() {
+        console.log("Name = " + this.name + ", Employee Code = " + this.empCode);
+    }
+}
+let per = new Owner(100, "Bill");
+per.display(); // Name = Bill, Employee Code = 100
+class Car {
+    constructor(name) {
+        this.name = name;
+    }
+    run(speed = 0) {
+        console.log("A " + this.name + " is moving at " + speed + " mph!");
+    }
+}
+// method overiding
+class Mercedes extends Car {
+    constructor(name) {
+        super(name);
+    }
+    run(speed = 150) {
+        console.log("A Mercedes started");
+        super.run(speed);
+    }
+}
+class Honda extends Car {
+    constructor(name) {
+        super(name);
+    }
+    run(speed = 100) {
+        console.log("A Honda started");
+        super.run(speed);
+    }
+}
+let mercObj = new Mercedes("Mercedes-Benz GLA");
+let hondaObj = new Honda("Honda City");
+mercObj.run(); // A Mercedes started A Mercedes-Benz GLA is moving at 150 mph!
+hondaObj.run(); // A Honda started A Honda City is moving at 100 mph!
+// data modifier
+// public
+// -bisa diakses didalam maupun diluar class
+// -definisi bisa menggunakan public atau tidak sama sekali.
+class myEmploye {
+    constructor(name, nickname, fullname) {
+        _myEmploye_fullname.set(this, void 0);
+        this.name = name;
+        this.nickname = nickname;
+        __classPrivateFieldSet(this, _myEmploye_fullname, fullname, "f");
+    }
+    myDisplay() {
+        console.log(this.nickname = "odik", __classPrivateFieldSet(this, _myEmploye_fullname, "odik yudi", "f"));
+    }
+}
+_myEmploye_fullname = new WeakMap();
+const myn = new myEmploye("odik", "yudi nugroho", "nu");
+console.log(myn.name);
+myn.myDisplay();
