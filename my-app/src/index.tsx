@@ -3,16 +3,19 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-export const UserContext = React.createContext({
-  title: "learn typescript (Default)",
-  id: 0,
-  description: "always run to learn (Default)",
-});
+interface ContextProps{
+  title?:string
+  id?:number
+  description?:string
+}
+
+export const UserContext = React.createContext<ContextProps | null>(null);
 root.render(
   <React.StrictMode>
     <UserContext.Provider value={{
