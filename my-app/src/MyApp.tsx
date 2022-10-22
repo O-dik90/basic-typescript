@@ -12,7 +12,6 @@ import {
   ButtonGroup,
   Card,
   Col,
-  Container,
   Form,
   InputGroup,
   Row,
@@ -22,8 +21,7 @@ import useFetch from "./useFetch";
 
 interface MyAppProps {
   title?: string;
-  children?:ReactNode;
-  
+  children?: ReactNode;
 }
 
 export function MyApp({ title }: MyAppProps) {
@@ -77,74 +75,84 @@ export function MyApp({ title }: MyAppProps) {
   //create custom hooks from other
   //masalahnya adalah:
   // akan terpanggil ketikaa rendering-ulang
-  const [data] = useFetch("https://jsonplaceholder.typicode.com/todos/")
+  const [data] = useFetch(
+    "https://jsonplaceholder.typicode.com/todos?userId=9"
+  );
 
   return (
     <>
-    {console.log(data)}
-      <p className="fs-4">{title}</p>
-      <p>{state}</p>
-      <ButtonGroup>
-        <Button className="btn" variant="primary" onClick={handleClick}>
-          State
-        </Button>
-        <Button
-          className="btn"
-          variant="primary"
-          onClick={() => setState("Code")}
-        >
-          Diff State
-        </Button>
-      </ButtonGroup>
-      <Row className="justify-content-center my-3">
-        <Col sm={5}>
-          <InputGroup className="mb-3">
-            <Form.Control
-              placeholder="Entry"
-              aria-label="Username"
-              aria-describedby="basic-addon1"
-              ref={Input}
-            />
-            <Button onClick={Click}>Focus the input</Button>
-          </InputGroup>
-        </Col>
-      </Row>
-      <Container className="mt-3">
-        <Row>
-          <Col>
-            <Card
-              style={{
-                width: "18rem",
-                backgroundColor: "#282c34",
-                color: "white",
-              }}
+      {console.log(data)}
+      <Row className="mt-2">
+        <Col>
+        <p>useState</p>
+          <p>{state}</p>
+          <ButtonGroup>
+            <Button className="btn" variant="primary" onClick={handleClick}>
+              State
+            </Button>
+            <Button
+              className="btn"
+              variant="primary"
+              onClick={() => setState("Code")}
             >
-              <Card.Body>
-                <p>{res?.title}</p>
-                <p>{res?.id}</p>
-                <p>{res?.description}</p>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-
-      <Row className="justify-content-center">
-        <Col xs={4}>
-          <InputGroup className="my-3">
-            <Form.Control
-              placeholder="Entry"
-              type="number"
-              aria-label="Username"
-              aria-describedby="basic-addon1"
-              value={numb}
-              onChange={onChangeHandler}
-            />
-            <Button onClick={counterHander}>Counter ++</Button>
-          </InputGroup>
+              Diff State
+            </Button>
+          </ButtonGroup>
+          <p>useRef</p>
+          <Row className="justify-content-center my-3">
+            <Col sm={8}>
+              <InputGroup className="mb-3">
+                <Form.Control
+                  placeholder="Entry"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  ref={Input}
+                />
+                <Button onClick={Click}>Focus the input</Button>
+              </InputGroup>
+            </Col>
+          </Row>
         </Col>
-        <p>Output: {square}</p>
-        <p>Counter: {counter}</p>
+        <Col className="d-flex justify-content-center">
+          <Row>
+            <Col>
+            <p>useContext</p>
+              <Card
+                style={{
+                  width: "18rem",
+                  backgroundColor: "#282c34",
+                  color: "white",
+                }}
+              >
+                <Card.Body>
+                  <p>{res?.title}</p>
+                  <p>{res?.id}</p>
+                  <p>{res?.description}</p>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </Col>
+        <Col>
+          <Row className="justify-content-center">
+            <p>useMemo</p>
+            <Col xs={8}>
+              <InputGroup className="my-1">
+                <Form.Control
+                  placeholder="Entry"
+                  type="number"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  value={numb}
+                  onChange={onChangeHandler}
+                />
+                <Button onClick={counterHander}>Counter ++</Button>
+              </InputGroup>
+            </Col>
+            <p>Output: {square}</p>
+            <p>Counter: {counter}</p>
+          </Row>
+        </Col>
       </Row>
     </>
   );
