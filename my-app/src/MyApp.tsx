@@ -12,17 +12,22 @@ import {
   ButtonGroup,
   Card,
   Col,
+  Container,
   Form,
   InputGroup,
   Row,
 } from "react-bootstrap";
 import { UserContext } from ".";
+import MyTodo from "./MyTodo";
 import useFetch from "./useFetch";
 
 interface MyAppProps {
   title?: string;
   children?: ReactNode;
 }
+
+
+
 
 export function MyApp({ title }: MyAppProps) {
   //useState
@@ -46,7 +51,6 @@ export function MyApp({ title }: MyAppProps) {
     console.log(Input);
     console.log(Input.current);
   };
-
   // usememo
   function squareNum(numb: number) {
     console.log("Squaring will be done!");
@@ -81,62 +85,59 @@ export function MyApp({ title }: MyAppProps) {
 
   return (
     <>
-      {console.log(data)}
-      <Row className="mt-2">
-        <Col>
-        <p>useState</p>
-          <p>{state}</p>
-          <ButtonGroup>
-            <Button className="btn" variant="primary" onClick={handleClick}>
-              State
-            </Button>
-            <Button
-              className="btn"
-              variant="primary"
-              onClick={() => setState("Code")}
-            >
-              Diff State
-            </Button>
-          </ButtonGroup>
-          <p>useRef</p>
-          <Row className="justify-content-center my-3">
-            <Col sm={8}>
-              <InputGroup className="mb-3">
-                <Form.Control
-                  placeholder="Entry"
-                  aria-label="Username"
-                  aria-describedby="basic-addon1"
-                  ref={Input}
-                />
-                <Button onClick={Click}>Focus the input</Button>
-              </InputGroup>
-            </Col>
-          </Row>
-        </Col>
-        <Col className="d-flex justify-content-center">
-          <Row>
-            <Col>
-            <p>useContext</p>
-              <Card
-                style={{
-                  width: "18rem",
-                  backgroundColor: "#282c34",
-                  color: "white",
-                }}
+      {/* {console.log(data)} */}
+      <Container>
+        <p>{title}</p>
+        <Row className="justify-content-center my-3">
+          <Col>
+            <p>useState</p>
+            <p>{state}</p>
+            <ButtonGroup>
+              <Button className="btn" variant="primary" onClick={handleClick}>
+                State
+              </Button>
+              <Button
+                className="btn"
+                variant="primary"
+                onClick={() => setState("Code")}
               >
-                <Card.Body>
-                  <p>{res?.title}</p>
-                  <p>{res?.id}</p>
-                  <p>{res?.description}</p>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        </Col>
-        <Col>
-          <Row className="justify-content-center">
+                Diff State
+              </Button>
+            </ButtonGroup>
+            <p>useRef</p>
+            <Row>
+              <Col>
+                <InputGroup className="mb-3">
+                  <Form.Control
+                    placeholder="Entry"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    ref={Input}
+                  />
+                  <Button onClick={Click}>Focus the input</Button>
+                </InputGroup>
+              </Col>
+            </Row>
+          </Col>
+          <Col>
+            <p>useContext</p>
+            <Card
+              style={{
+                width: "100%",
+                backgroundColor: "#282c34",
+                color: "white",
+              }}
+            >
+              <Card.Body>
+                <p>{res?.title}</p>
+                <p>{res?.id}</p>
+                <p>{res?.description}</p>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col>
             <p>useMemo</p>
-            <Col xs={8}>
+            <Col>
               <InputGroup className="my-1">
                 <Form.Control
                   placeholder="Entry"
@@ -151,9 +152,10 @@ export function MyApp({ title }: MyAppProps) {
             </Col>
             <p>Output: {square}</p>
             <p>Counter: {counter}</p>
-          </Row>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      </Container>
+      <MyTodo data={data}></MyTodo>
     </>
   );
 }
