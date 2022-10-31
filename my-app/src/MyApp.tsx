@@ -18,18 +18,17 @@ import {
   Row,
 } from "react-bootstrap";
 import { UserContext } from ".";
+import MyTable, { ColumnInfo } from "./MyTable";
 import MyTodo from "./MyTodo";
 import useFetch from "./useFetch";
 
 interface MyAppProps {
   title?: string;
   children?: ReactNode;
+  input?: any;
 }
 
-
-
-
-export function MyApp({ title }: MyAppProps) {
+export function MyApp({ title, input }: MyAppProps) {
   //useState
   const [state, setState] = useState("Code");
   const handleClick = () => {
@@ -46,10 +45,9 @@ export function MyApp({ title }: MyAppProps) {
 
   // useRef
   // belum full understanding, maksud dari mereferensikannya
-  const Input = useRef(null);
-  const Click = () => {
-    console.log(Input);
-    console.log(Input.current);
+  const Input = useRef(input || null);
+  const handleButton = () => {
+    console.log(Input.current.value);
   };
   // usememo
   function squareNum(numb: number) {
@@ -83,6 +81,25 @@ export function MyApp({ title }: MyAppProps) {
     "https://jsonplaceholder.typicode.com/todos?userId=9"
   );
 
+  const columns = useMemo<ColumnInfo<any>[]>(() => [
+    {
+      name: "Title",
+      selector: (row) => row.title,
+      sortable: true,
+    },
+    {
+      name: "Director",
+      selector: (row) => row.director,
+    },
+    {
+      name: "Years",
+      selector: (row) => row.year,
+    },
+    {
+      name: "Genre",
+      selector: (row) => row.genres,
+    },
+  ], []);
   return (
     <>
       {/* {console.log(data)} */}
@@ -110,11 +127,11 @@ export function MyApp({ title }: MyAppProps) {
                 <InputGroup className="mb-3">
                   <Form.Control
                     placeholder="Entry"
-                    aria-label="Username"
                     aria-describedby="basic-addon1"
+                    id="input"
                     ref={Input}
                   />
-                  <Button onClick={Click}>Focus the input</Button>
+                  <Button onClick={handleButton}>Input</Button>
                 </InputGroup>
               </Col>
             </Row>
@@ -154,6 +171,9 @@ export function MyApp({ title }: MyAppProps) {
             <p>Counter: {counter}</p>
           </Col>
         </Row>
+        <Col>
+          <MyTable columns={columns} />
+        </Col>
       </Container>
       <MyTodo data={data}></MyTodo>
     </>
