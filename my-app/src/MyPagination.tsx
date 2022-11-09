@@ -3,10 +3,6 @@ import { Card, Row, Image, Col } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
 import useFetch from "./useFetch";
 
-// export interface MyPaginationProps {
-//   data?: any;
-// }
-// const data = useFetch("https://jsonplaceholder.typicode.com/photos?albumId=9");
 export default function MyPagination() {
   const [ newData ] = useFetch(
     "https://jsonplaceholder.typicode.com/photos?albumId=9"
