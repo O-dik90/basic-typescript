@@ -15,7 +15,7 @@ interface MyTodoProps {
 const MyTodo = ({ data }: MyTodoProps) => {
   return (
     <>
-      <p className="fw-bold">MYTODO</p>
+      <p className="fw-bold mt-3">MYTODO</p>
       {/* {console.log(data[0])} */}
       <Container>
         <InputGroup className="mb-3 d-flex justify-content-center">

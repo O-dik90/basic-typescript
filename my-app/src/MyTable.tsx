@@ -2,6 +2,15 @@ import { useMemo } from "react";
 import { Card } from "react-bootstrap";
 import DataTable, { TableColumn } from "react-data-table-component";
 
+const customStyles = {
+  pagination:{
+    style:{
+      color: "Blue",
+      justifyContent: "center"
+    }
+  }
+};
+
 const movies = [
   {
     id: 1,
@@ -38,41 +47,19 @@ const movies = [
     plot: "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
     posterUrl:
       "https://images-na.ssl-images-amazon.com/images/M/MV5BODU4MjU4NjIwNl5BMl5BanBnXkFtZTgwMDU2MjEyMDE@._V1_SX300.jpg",
-  },
-  {
-    id: 4,
-    title: "Crocodile Dundee",
-    year: "1986",
-    runtime: "97",
-    genres: ["Adventure", "Comedy"],
-    director: "Peter Faiman",
-    actors: "Paul Hogan, Linda Kozlowski, John Meillon, David Gulpilil",
-    plot: "An American reporter goes to the Australian outback to meet an eccentric crocodile poacher and invites him to New York City.",
-    posterUrl:
-      "https://images-na.ssl-images-amazon.com/images/M/MV5BMTg0MTU1MTg4NF5BMl5BanBnXkFtZTgwMDgzNzYxMTE@._V1_SX300.jpg",
-  },
-  {
-    id: 5,
-    title: "Valkyrie",
-    year: "2008",
-    runtime: "121",
-    genres: ["Drama", "History", "Thriller"],
-    director: "Bryan Singer",
-    actors: "Tom Cruise, Kenneth Branagh, Bill Nighy, Tom Wilkinson",
-    plot: "A dramatization of the 20 July assassination and political coup plot by desperate renegade German Army officers against Hitler during World War II.",
-    posterUrl:
-      "http://ia.media-imdb.com/images/M/MV5BMTg3Njc2ODEyN15BMl5BanBnXkFtZTcwNTAwMzc3NA@@._V1_SX300.jpg",
-  },
+  }
 ];
-//mmebuat tipedata baru
+//mmebuat tipedata baru secara General
 export type ColumnInfo<T> = TableColumn<T>;
-
-
+//membuat blue-print propertiesa yang akan dipakai pada komponen
 interface MyTableProps {
   columns?: ColumnInfo<any>[];
-  rowNumber?: boolean;
 }
 function MyTable({ columns = [] }: MyTableProps) {
+  // memanfaatkan state useMemo untuk pemanggilan sekali saja,
+  // dan disimpan pada array ,
+  // ketika ada pemanggilan tanpa ada perbuahan maka akan emmangil dari arraynya
+  // adapa bila ada update data, maka akan 1x melakukan rendering  
   const dataColumns = useMemo(() => columns, [columns]);
   return (
     <div className="App">
@@ -82,10 +69,8 @@ function MyTable({ columns = [] }: MyTableProps) {
           title="Movies"
           columns={dataColumns}
           data={movies}
-          // defaultSortField="title"
-          // sortIcon={<SortIcon />}
           pagination
-          // selectableRows
+          customStyles={customStyles}
         />
       </Card>
     </div>

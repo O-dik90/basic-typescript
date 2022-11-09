@@ -18,6 +18,7 @@ import {
   Row,
 } from "react-bootstrap";
 import { UserContext } from ".";
+import MyPagination from "./MyPagination";
 import MyTable, { ColumnInfo } from "./MyTable";
 import MyTodo from "./MyTodo";
 import useFetch from "./useFetch";
@@ -80,26 +81,32 @@ export function MyApp({ title, input }: MyAppProps) {
   const [data] = useFetch(
     "https://jsonplaceholder.typicode.com/todos?userId=9"
   );
+  // const [datapagination] = useFetch(
+  //   "https://jsonplaceholder.typicode.com/photos?albumId=9"
+  // );
 
-  const columns = useMemo<ColumnInfo<any>[]>(() => [
-    {
-      name: "Title",
-      selector: (row) => row.title,
-      sortable: true,
-    },
-    {
-      name: "Director",
-      selector: (row) => row.director,
-    },
-    {
-      name: "Years",
-      selector: (row) => row.year,
-    },
-    {
-      name: "Genre",
-      selector: (row) => row.genres,
-    },
-  ], []);
+  const columns = useMemo<ColumnInfo<any>[]>(
+    () => [
+      {
+        name: "Title",
+        selector: (row) => row.title,
+        sortable: true,
+      },
+      {
+        name: "Director",
+        selector: (row) => row.director,
+      },
+      {
+        name: "Years",
+        selector: (row) => row.year,
+      },
+      {
+        name: "Genre",
+        selector: (row) => row.genres,
+      },
+    ],
+    []
+  );
   return (
     <>
       {/* {console.log(data)} */}
@@ -176,6 +183,9 @@ export function MyApp({ title, input }: MyAppProps) {
         </Col>
       </Container>
       <MyTodo data={data}></MyTodo>
+      <MyPagination
+        // data={datapagination}
+      ></MyPagination>
     </>
   );
 }
