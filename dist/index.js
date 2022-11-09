@@ -8,6 +8,8 @@ var _myEmploye_fullname;
 console.log("Hello, Typescript");
 let nama = "odik yudi nugroho";
 console.log(nama);
+const num = ['string', 5, true];
+console.log(num);
 // tuples
 console.log("___tuples___");
 var employee = [1, "Steve"];
@@ -219,7 +221,7 @@ class myEmploye {
         __classPrivateFieldSet(this, _myEmploye_fullname, fullname, "f");
     }
     myDisplay() {
-        console.log(this.nickname = "odik", __classPrivateFieldSet(this, _myEmploye_fullname, "odik yudi", "f"));
+        console.log((this.nickname = "odik"), (__classPrivateFieldSet(this, _myEmploye_fullname, "odik yudi", "f")));
     }
 }
 _myEmploye_fullname = new WeakMap();

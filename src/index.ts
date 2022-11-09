@@ -133,7 +133,9 @@ interface rectangle {
   p?: number;
 }
 type shape = rectangle | square;
+const shapes: shape = { state: "reactangle", l: 6, p:9}
 
+console.log(shapes)
 function block(state: shape) {
   // if (state.state === "square") {
   //   return console.log("ini square ", state.l**2);
@@ -143,14 +145,14 @@ function block(state: shape) {
   //   return console.log("coba lagi");
   // }
 
-  switch (state.state) {
-    case "square":
-      return console.log("square", state.l);
-    case "reactangle":
-      return console.log("rectangle", state.l * state.p);
-    default:
-      break;
-  }
+  // switch (state.state) {
+  //   case "square":
+  //     return console.log("square", state.l);
+  //   case "reactangle":
+  //     return console.log("rectangle", state.l * state.p);
+  //   default:
+  //     break;
+  // }
 }
 
 block({ state: "square", l: 5 });
@@ -162,10 +164,10 @@ console.log("___expression___");
 let ax: number = 5;
 let user: string | number | boolean;
 
-let z = (typeof user === "string" && user.length) || user;
-if (typeof user === "string") {
-  user;
-}
+// let z = (typeof user === "string" && user.length) || user;
+// if (typeof user === "string") {
+//   user;
+// }
 console.log("       ");
 
 console.log("___Class___");
@@ -289,16 +291,16 @@ class myEmploye {
   public name: string;
 
   private nickname: string;
-  #fullname : string
+  #fullname: string;
 
-  constructor(name:string, nickname: string, fullname: string){
-    this.name = name
-    this.nickname = nickname
-    this.#fullname = fullname
+  constructor(name: string, nickname: string, fullname: string) {
+    this.name = name;
+    this.nickname = nickname;
+    this.#fullname = fullname;
   }
 
   myDisplay(): void {
-    console.log( this.nickname = "odik", this.#fullname = "odik yudi")
+    console.log((this.nickname = "odik"), (this.#fullname = "odik yudi"));
   }
 }
 
